@@ -6,7 +6,7 @@ import seaborn as sns
 # Set page to wide layout
 st.set_page_config(page_title="Airport Analytics Dashboard", layout="wide")
 
-# Custom CSS to mimic the exact colors, borders, and dark-theme of 1739210929064_2.png
+# Custom CSS to mimic the exact colors, borders, and dark-theme of the layout
 st.markdown("""
     <style>
     /* Main Background */
@@ -69,10 +69,11 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# 1. Load and Preprocess Dataset
+# 1. Load and Preprocess Dataset (PATH FIXED HERE)
 @st.cache_data
 def load_data():
-    df = pd.read_csv("data/airport-codes (1).csv")
+    # Direct file read without 'data/' folder prefix
+    df = pd.read_csv("airport-codes (1).csv")
     if 'elevation_ft' in df.columns:
         df['elevation_ft'] = pd.to_numeric(df['elevation_ft'], errors='coerce')
     return df
@@ -81,7 +82,6 @@ try:
     df = load_data()
 
     # --- TOP ROW: HEADER & KPI CARDS ---
-    # Creating a layout layout for top row metrics similar to the image
     top_col1, top_col2, top_col3, top_col4, top_col5 = st.columns([1.2, 1.2, 1.2, 1.2, 3.5])
     
     with top_col1:
